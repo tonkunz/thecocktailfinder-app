@@ -1,6 +1,6 @@
 <template>
-  <div class="home-page-container">
-    <HelloWorld msg="Bem vindo ao The Cocktail Finder!"/>
+  <div>
+    <HelloWorld />
   </div>
 </template>
 
@@ -14,11 +14,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.home-page-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>

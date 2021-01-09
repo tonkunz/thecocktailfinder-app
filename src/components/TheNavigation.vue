@@ -1,23 +1,28 @@
 <template>
-  <nav id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">Sobre</router-link>
+  <nav>
+    <router-link to="/" class="logo">
+      <img src="@/assets/logo.svg" alt="The CocktailFinder Logo">
+    </router-link>
   </nav>
 </template>
 
 <style scoped>
-#nav {
+nav {
+  position: fixed;
   display: flex;
-  justify-content: center;
-  padding: 30px;
+  margin-top: 20px;
+  padding: 15px 15px 15px 50px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
   background: #583D72;
 }
-#nav a {
-  font-weight: bold;
-  color: #fff;
-  padding: 0 10px;
+
+.logo img {
+  width: 150px;
+  transition: transform .2s;
 }
-#nav a.custom-active-route-class {
-  color: #cfcfcf;
+
+.logo img:hover {
+  transform: scale(1.1);
 }
 </style>

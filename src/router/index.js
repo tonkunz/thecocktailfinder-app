@@ -21,7 +21,6 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  linkExactActiveClass: "custom-active-route-class",
   routes
 });
 

@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <TheNavigation />
-    <!-- <img alt="The Drink Finder logo" src="./assets/logo.svg"> -->
     <main id="main">
       <router-view />
     </main>
@@ -35,7 +34,6 @@ export default {
 }
 
 body, ul, li, h1, h2, p {
-  margin: 0px;
   margin: 0px;
 }
 
