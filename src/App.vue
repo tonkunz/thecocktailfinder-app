@@ -33,7 +33,7 @@ export default {
   flex: 1;
 }
 
-body, ul, li, h1, h2, p {
+body, ul, li, h1, h2, h3, p {
   margin: 0px;
 }
 
