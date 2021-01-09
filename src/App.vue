@@ -1,28 +1,54 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TheNavigation />
+    <!-- <img alt="The Drink Finder logo" src="./assets/logo.svg"> -->
+    <main id="main">
+      <router-view />
+    </main>
+    <TheFooter />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheNavigation from "@/components/TheNavigation";
+import TheFooter from "@/components/TheFooter";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TheNavigation,
+    TheFooter
   }
 }
 </script>
 
 <style>
+/** Estilos Globais da aplicação */
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#main {
+  flex: 1;
+}
+
+body, ul, li, h1, h2, p {
+  margin: 0px;
+  margin: 0px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  color: #345;
 }
 </style>
