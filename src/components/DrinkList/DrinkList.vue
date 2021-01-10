@@ -14,6 +14,7 @@
 <script>
 import ListHeader from "./ListHeader.vue";
 import ListFilter from "./ListFilter.vue";
+import { inicialFetch } from "@/services/api.js";
 
 export default {
   name: "DrinkList",
@@ -23,16 +24,24 @@ export default {
   },
   data() {
     return {
-      typesFilter: [
-        "Filtrar por Nome",
-        "Filtrar por teor Alcoólico",
-        "Filtrar por Categoria",
-        "Filtrar por Tipo do Copo",
-        "Filtrar por Ingrediente",
-      ],
-      typeSelected: "Nenhum Selecionado",
+      drinkList: []
     };
   },
+  /** LifeCycle Hook com uma lista inicial de drinks */
+  beforeMount () {
+    this.fetchInitialData();
+  },
+  methods: {
+
+    async fetchInitialData() {
+      try {
+        const result = await inicialFetch();
+        this.drinkList = result;
+      } catch (ex) {
+        console.log("err: ", ex);
+      }
+    }
+  }
 };
 </script>
 
