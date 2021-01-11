@@ -11,14 +11,14 @@ nav {
   position: fixed;
   display: flex;
   margin-top: 20px;
-  padding: 15px 15px 15px 50px;
+  padding: 0 20px 0 50px;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   background: #583D72;
 }
 
 .logo img {
-  width: 150px;
+  width: 135px;
   transition: transform .2s;
 }
 

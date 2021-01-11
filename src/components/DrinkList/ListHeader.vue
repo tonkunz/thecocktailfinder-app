@@ -1,28 +1,30 @@
 <template>
   <div class="list-header">
-    <h3>Coquetéis</h3>
+    <img
+      src="@/assets/images/Coqueteis.svg"
+      alt="The CocktailFinder Logo"
+      class="coqueteis"
+    />
 
-    <img src="@/assets/logo.svg" alt="The CocktailFinder Logo" />
+    <img src="@/assets/logo.svg" alt="The CocktailFinder Logo" class="logo" />
   </div>
 </template>
 
 <style escoped>
 .list-header {
   display: flex;
-  background: #583D72;
+  background: #583d72;
   justify-content: space-between;
   align-items: center;
   border-radius: 50px;
 }
 
-.list-header h3 {
-  font-size: 1.75em;
-  color: #fff;
+.coqueteis {
+  height: 40px;
   margin: .5rem 2rem;
-  font-weight: 300;
 }
 
-.list-header img {
+.logo {
   margin: 1rem 2rem;
   width: 125px;
 }
