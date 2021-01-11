@@ -4,7 +4,7 @@
       <ListHeader />
       <div class="content-container">
         <!-- Filtros da busca -->
-        <ListFilter />
+        <ListFilter @search="fetchRouter($event)" />
         <!-- Listagem dos drinks -->
         <div class="drink-list">
           <div
@@ -24,7 +24,10 @@
 import ListHeader from "./ListHeader.vue";
 import ListFilter from "./ListFilter.vue";
 import DrinkCard from "./DrinkCard";
-import { inicialFetch } from "@/services/api.js";
+import {
+  inicialFetch,
+  searchByCocktailName
+} from "@/services/api.js";
 
 export default {
   name: "DrinkList",
@@ -43,6 +46,7 @@ export default {
     this.fetchInitialData();
   },
   methods: {
+    /** Faz a requisição com os drinks iniciais */
     async fetchInitialData() {
       try {
         const result = await inicialFetch();
@@ -50,6 +54,37 @@ export default {
       } catch (ex) {
         console.log("err: ", ex);
       }
+    },
+    /** Método responsável por direcionar a busca para
+     * o endpoint correto baseado no filtro recebido
+     */
+    fetchRouter(data) {
+      console.log("Search called - type: ", data.typeSelected);
+      console.log("content: ", data.filterContent);
+      switch (data.typeSelected) {
+        case "nome":
+          this.fetchByName(data.filterContent);
+          break;
+        case "teor":
+          // TODO: fetch by teor;
+          console.log("Fetch by [teor]");
+          break;
+        case "categoria":
+          // TODO: fetch by categoria;
+          console.log("Fetch by [categoria]");
+          break;
+        case "copo":
+          // TODO: fetch by copo
+          console.log("Fetch by [copo]");
+          break;
+        case "ingrediente":
+          // TODO: fetch by ingrediente
+          console.log("Fetch by [ingrediente]");
+          break;
+      }
+    },
+    async fetchByName(name) {
+      this.drinkList = await searchByCocktailName(name);
     },
   },
 };
@@ -88,6 +123,9 @@ export default {
 @media (max-width: 1025px) {
   .content-container {
     flex-direction: column;
+  }
+  .drink-list {
+    margin-top: 2rem;
   }
 }
 </style>

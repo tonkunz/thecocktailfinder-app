@@ -49,15 +49,13 @@ export default {
   cursor: pointer;
   outline: none;
   font-size: 1.2em;
-  transition: all 0.2s ease-in-out;
 }
 
 .btn:hover {
   background-color: #9558cf;
-  transform: scale(1.03);
 }
 
 .btn:disabled {
-  background-color: #c6a1e9;
+  background-color: #c9c9c9;
 }
 </style>
