@@ -60,7 +60,7 @@ export default {
 <style scoped>
 .filter-section {
   flex: 1;
-  margin: 1rem 3rem;
+  margin: 0 1rem;
   display: flex;
   flex-direction: column;
 }
