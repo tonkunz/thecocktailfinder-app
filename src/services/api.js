@@ -11,3 +11,9 @@ export const searchByCocktailName = name => {
     .then(res => res.json())
     .then(data => data["drinks"]);
 }
+
+export const filterCocktails = (type, param) => {
+  return fetch(`${url}/filter.php?${type}=${param}`)
+    .then(res => res.json())
+    .then(data => data["drinks"]);
+}

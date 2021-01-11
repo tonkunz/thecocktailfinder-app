@@ -38,9 +38,9 @@
       class="select"
     >
       <option value="">Selecione o teor Alcoólico</option>
-      <option value="Não Alcoólico">Não Alcoólico</option>
-      <option value="Alcoólico">Alcoólico</option>
-      <option value="Álcool Opcional">Álcool Opcional</option>
+      <option value="non_alcoholic">Não Alcoólico</option>
+      <option value="alcoholic">Alcoólico</option>
+      <option value="optional_alcohol">Álcool Opcional</option>
     </select>
 
     <!--

@@ -26,7 +26,8 @@ import ListFilter from "./ListFilter.vue";
 import DrinkCard from "./DrinkCard";
 import {
   inicialFetch,
-  searchByCocktailName
+  searchByCocktailName,
+  filterCocktails
 } from "@/services/api.js";
 
 export default {
@@ -66,8 +67,7 @@ export default {
           this.fetchByName(data.filterContent);
           break;
         case "teor":
-          // TODO: fetch by teor;
-          console.log("Fetch by [teor]");
+          this.filterCocktail("a", data.filterContent);
           break;
         case "categoria":
           // TODO: fetch by categoria;
@@ -86,6 +86,9 @@ export default {
     async fetchByName(name) {
       this.drinkList = await searchByCocktailName(name);
     },
+    async filterCocktail(type, param) {
+      this.drinkList = await filterCocktails(type, param);
+    }
   },
 };
 </script>
