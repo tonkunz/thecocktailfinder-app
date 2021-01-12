@@ -60,8 +60,6 @@ export default {
      * o endpoint correto baseado no filtro recebido
      */
     fetchRouter(data) {
-      console.log("Search called - type: ", data.typeSelected);
-      console.log("content: ", data.filterContent);
       switch (data.typeSelected) {
         case "nome":
           this.fetchByName(data.filterContent);

@@ -30,10 +30,11 @@
       class="input-name"
     />
 
+    <!-- Select de teor alcoólico -->
     <select
       v-if="search.typeSelected === 'teor'"
       name="teor Alcoólico"
-      id="ter-alcoolico"
+      id="teor-select"
       v-model="search.filterContent"
       class="select"
     >
@@ -42,6 +43,44 @@
       <option value="alcoholic">Alcoólico</option>
       <option value="optional_alcohol">Álcool Opcional</option>
     </select>
+
+    <!-- Select de categoria -->
+    <select
+      v-if="search.typeSelected === 'categoria'"
+      name="categoria select"
+      id="categoria-select"
+      v-model="search.filterContent"
+      class="select"
+    >
+      <option value="">Selecione uma categoria</option>
+      <option
+        v-for="(cat, key) in categories"
+        :key="key"
+        :value="cat.strCategory"
+      >
+        {{ cat.strCategory }}
+      </option>
+    </select>
+
+    <!-- Select de Tipo de Copo -->
+    <select
+      v-if="search.typeSelected === 'copo'"
+      name="Copo select"
+      id="cop-select"
+      v-model="search.filterContent"
+      class="select"
+    >
+      <option value="">Selecione um tipo de Copo</option>
+      <option
+        v-for="(copo, key) in categories"
+        :key="key"
+        :value="copo.strCategory"
+      >
+        {{ copo.strCategory }}
+      </option>
+    </select>
+
+    <!-- TODO: Select de ingrediente -->
 
     <!--
       - Botão de busca.
@@ -59,6 +98,7 @@
 
 <script>
 import AppBtn from "@/components/shared/AppBtn.vue";
+import { getFilterList } from "@/services/api.js";
 
 export default {
   name: "ListFilter",
@@ -74,16 +114,29 @@ export default {
         { type: "copo", text: "Filtrar por Tipo do Copo" },
         { type: "ingrediente", text: "Filtrar por Ingrediente" },
       ],
+      categories: [],
+      glasses: [],
       search: {
         typeSelected: "",
         filterContent: "",
       },
     };
   },
+  beforeMount() {
+    this.fetchInitialData();
+  },
   methods: {
+    async fetchInitialData() {
+      // Pega as categorias dos drinks
+      this.categories = await getFilterList("c");
+      this.glasses = await getFilterList("g");
+    },
     handleChangeType() {
       this.search.filterContent = ""
     },
+    fetchFIlterList() {
+
+    }
   },
 };
 </script>
