@@ -65,18 +65,18 @@
     <!-- Select de Tipo de Copo -->
     <select
       v-if="search.typeSelected === 'copo'"
-      name="Copo select"
-      id="cop-select"
+      name="glass select"
+      id="glass-select"
       v-model="search.filterContent"
       class="select"
     >
       <option value="">Selecione um tipo de Copo</option>
       <option
-        v-for="(copo, key) in categories"
+        v-for="(glass, key) in glasses"
         :key="key"
-        :value="copo.strCategory"
+        :value="glass.strGlass"
       >
-        {{ copo.strCategory }}
+        {{ glass.strGlass }}
       </option>
     </select>
 
@@ -132,10 +132,7 @@ export default {
       this.glasses = await getFilterList("g");
     },
     handleChangeType() {
-      this.search.filterContent = ""
-    },
-    fetchFIlterList() {
-
+      this.search.filterContent = "";
     }
   },
 };

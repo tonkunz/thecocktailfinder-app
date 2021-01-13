@@ -68,12 +68,10 @@ export default {
           this.filterCocktail("a", data.filterContent);
           break;
         case "categoria":
-          // TODO: fetch by categoria;
-          console.log("Fetch by [categoria]");
+          this.filterCocktail("c", data.filterContent.replace(/ /g,"_"));
           break;
         case "copo":
-          // TODO: fetch by copo
-          console.log("Fetch by [copo]");
+          this.filterCocktail("g", data.filterContent.replace(/ /g,"_"));
           break;
         case "ingrediente":
           // TODO: fetch by ingrediente
@@ -102,6 +100,8 @@ export default {
   display: flex;
   flex-direction: column;
   max-width: 1750px; /** Ajuste p/ telas muito grandes (ultra-wide) */
+  width: 100%;
+  min-height: 750px;
 }
 
 .content-container {

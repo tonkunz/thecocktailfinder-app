@@ -6,7 +6,7 @@
     />
     <div class="card-content">
       <h1 class="card-title">{{ drink.strDrink }}</h1>
-      <span class="card-category">{{ drink.strCategory }}</span>
+      <span class="card-category" v-if="drink.strCategory">{{ drink.strCategory }}</span>
     </div>
   </div>
 </template>
