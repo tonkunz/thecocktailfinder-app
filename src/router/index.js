@@ -17,6 +17,13 @@ const routes = [
     path: "/about",
     name: "About",
     component: AboutPage
+  },
+  {
+    path: "/drink/:id",
+    name: "Drink",
+    props: true,
+    /** Lazy Routes */
+    component: () => import(/* webpackChunkName: "about" */ "@/pages/DrinkPage.vue")
   }
 ];
 

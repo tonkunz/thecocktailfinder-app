@@ -39,3 +39,13 @@ export const getFilterList = (filter) => {
     .then(res => res.json())
     .then(data => data["drinks"]);
 }
+
+/** Consulta detalhes e um coquetel por ID
+ * @param id: Number do id do coquetel
+ * @return: Objeto contendo diversos dados do drink
+ */
+export const getCocktailDetails = id => {
+  return fetch(`${url}/lookup.php?i=${id}`)
+    .then(res => res.json())
+    .then(data => data["drinks"][0]);
+}
