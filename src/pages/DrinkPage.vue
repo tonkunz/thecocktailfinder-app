@@ -1,43 +1,65 @@
 <template>
   <div class="container">
-    <h1>Drink Page</h1>
-    <div class="content-container">
-      Id: {{ id }}
-      Coquetel Name: {{ result.strDrink }}
-      <p class="instructions">
-        {{ result.strInstructions}}
-      </p>
+    <!-- Loading enquanto é feito o fetch dos dados -->
+    <div class="loading-container" v-if="loading">
+      <h3>Carregando...</h3>
+      <CircularLoader v-if="loading" />
+    </div>
+
+    <!-- Conteúdo renderizado após o fetch ser completo -->
+    <div v-else class="drink-container">
+      <h1 class="drink-name">{{ result.strDrink }}</h1>
+
+      <div class="content-container">
+        <img
+          class="drink-preview"
+          :src="`${result.strDrinkThumb}/preview`"
+          :alt="`${result.strDrink} thumbnail`"
+        />
+
+        <div class="drink-texts">
+          <div class="category-alcoholic">
+            <h3>{{ result.strCategory }}</h3>
+            <h3>{{ result.strAlcoholic }}</h3>
+          </div>
+          <p class="instructions">
+            <strong>Preparo: </strong>{{ result.strInstructions }}
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import CircularLoader from "@/components/shared/CircularLoader.vue";
 import { getCocktailDetails } from "@/services/api.js";
 
 export default {
   name: "DrinkPage",
+  components: {
+    CircularLoader,
+  },
   /** Prop id recebida pela rota */
-  props: ['id'],
-  data () {
+  props: ["id"],
+  data() {
     return {
       loading: false,
-      result: {}
-    }
+      result: {},
+    };
   },
   /** Lifecycle Hook onCreate */
-  created () {
+  created() {
     this.fetchDrinkData();
   },
   methods: {
-    async fetchDrinkData () {
+    async fetchDrinkData() {
       this.loading = true;
-      // TODO: Fecth by props.id
-      console.log("Fetch by id: ", this.id);
       this.result = await getCocktailDetails(this.id);
-      console.log("cocktails details: ", this.result);
-    }
-  }
-}
+      this.loading = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -47,13 +69,62 @@ export default {
   flex-direction: column;
 }
 
-.content-container {
+.loading-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: center;
+}
+
+.drink-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.drink-name {
+  color: #583d72;
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.content-container {
+  display: flex;
+  widows: 500px;
+}
+
+.drink-preview {
+  margin-right: 2rem;
+  height: 250px;
+  width: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+.drink-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-alcoholic {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  background: #583d72;
+  color: #fff;
+  padding: .5rem;
+  border-radius: 20px;
 }
 
 .instructions {
-  max-width: 500px;
+  width: 750px;
+}
+
+/** Responsividade */
+@media (max-width: 875px) {
+  .category-alcoholic {
+    margin-top: 1rem;
+  }
+  .instructions {
+    width: auto;
+  }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <router-link :to="`drink/${drink.idDrink}`" class="card">
     <img
       :src="`${drink.strDrinkThumb}/preview`"
       :alt="`${drink.strDrink} thumbnail`"
@@ -10,7 +10,7 @@
         {{ drink.strCategory }}
       </span>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -25,6 +25,7 @@ export default {
 
 <style scoped>
 .card {
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.123);
@@ -56,9 +57,11 @@ export default {
 .card-title {
   font-size: 1.2em;
   font-weight: bold;
+  color: #583D72;
 }
 
 .card-category {
   font-size: .85em;
+  color: #345;
 }
 </style>
