@@ -25,6 +25,8 @@
           <p class="instructions">
             <strong>Preparo: </strong>{{ result.strInstructions }}
           </p>
+
+          <IngredientList :ingredients="ingredientsMeasures"/>
         </div>
       </div>
     </div>
@@ -33,12 +35,15 @@
 
 <script>
 import CircularLoader from "@/components/shared/CircularLoader.vue";
+import IngredientList from "@/components/DrinkPage/IngredientList.vue";
 import { getCocktailDetails } from "@/services/api.js";
+import { handleIngredients } from "@/utils/drinkDataHelpers.js";
 
 export default {
   name: "DrinkPage",
   components: {
     CircularLoader,
+    IngredientList
   },
   /** Prop id recebida pela rota */
   props: ["id"],
@@ -46,6 +51,7 @@ export default {
     return {
       loading: false,
       result: {},
+      ingredientsMeasures: []
     };
   },
   /** Lifecycle Hook onCreate */
@@ -57,6 +63,7 @@ export default {
       this.loading = true;
       this.result = await getCocktailDetails(this.id);
       this.loading = false;
+      this.ingredientsMeasures = handleIngredients(this.result);
     },
   },
 };
@@ -67,6 +74,7 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 7em;
 }
 
 .loading-container {
@@ -78,6 +86,7 @@ export default {
 .drink-container {
   display: flex;
   flex-direction: column;
+  align-content: center;
 }
 
 .drink-name {
@@ -106,7 +115,7 @@ export default {
 
 .category-alcoholic {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 1.5rem;
   background: #583d72;
   color: #fff;
@@ -120,11 +129,21 @@ export default {
 
 /** Responsividade */
 @media (max-width: 875px) {
+  .drink-preview {
+    margin: 0;
+  }
   .category-alcoholic {
     margin-top: 1rem;
   }
   .instructions {
     width: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .category-alcoholic {
+    font-size: .8em;
+    justify-content: space-between;
   }
 }
 </style>
