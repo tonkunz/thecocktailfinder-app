@@ -26,7 +26,17 @@
             <strong>Preparo: </strong>{{ result.strInstructions }}
           </p>
 
-          <IngredientList :ingredients="ingredientsMeasures"/>
+          <IngredientList :ingredients="ingredientsMeasures" />
+
+          <div class="btn-container">
+            <button>Compartilhar</button>
+            <button @click="showAvaliationModal = true">Avaliar</button>
+          </div>
+
+          <AvaliationModal
+            v-if="showAvaliationModal"
+            @close="showAvaliationModal = false"
+          />
         </div>
       </div>
     </div>
@@ -36,6 +46,7 @@
 <script>
 import CircularLoader from "@/components/shared/CircularLoader.vue";
 import IngredientList from "@/components/DrinkPage/IngredientList.vue";
+import AvaliationModal from "@/components/DrinkPage/AvaliationModal.vue";
 import { getCocktailDetails } from "@/services/api.js";
 import { handleIngredients } from "@/utils/drinkDataHelpers.js";
 
@@ -43,7 +54,8 @@ export default {
   name: "DrinkPage",
   components: {
     CircularLoader,
-    IngredientList
+    IngredientList,
+    AvaliationModal
   },
   /** Prop id recebida pela rota */
   props: ["id"],
@@ -51,7 +63,8 @@ export default {
     return {
       loading: false,
       result: {},
-      ingredientsMeasures: []
+      ingredientsMeasures: [],
+      showAvaliationModal: false,
     };
   },
   /** Lifecycle Hook onCreate */
@@ -119,12 +132,18 @@ export default {
   margin-bottom: 1.5rem;
   background: #583d72;
   color: #fff;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 20px;
 }
 
 .instructions {
   width: 750px;
+}
+
+@media (max-width: 1025px) {
+  .content-container {
+    align-items: center;
+  }
 }
 
 /** Responsividade */
@@ -142,7 +161,7 @@ export default {
 
 @media (max-width: 500px) {
   .category-alcoholic {
-    font-size: .8em;
+    font-size: 0.8em;
     justify-content: space-between;
   }
 }
