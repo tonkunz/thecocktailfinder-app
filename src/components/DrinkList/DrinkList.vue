@@ -7,7 +7,13 @@
         <ListFilter @search="fetchRouter($event)" />
         <!-- Listagem dos drinks -->
         <div class="drink-list">
+          <div class="loading-container" v-if="loading">
+            <h3>Carregando...</h3>
+            <CircularLoader v-if="loading" />
+          </div>
+
           <div
+            v-else
             v-for="drink in drinkList"
             :key="drink.idDrink"
             class="list-item"
@@ -24,10 +30,11 @@
 import ListHeader from "./ListHeader.vue";
 import ListFilter from "./ListFilter.vue";
 import DrinkCard from "./DrinkCard";
+import CircularLoader from "@/components/shared/CircularLoader.vue";
 import {
   inicialFetch,
   searchByCocktailName,
-  filterCocktails
+  filterCocktails,
 } from "@/services/api.js";
 
 export default {
@@ -36,10 +43,12 @@ export default {
     ListHeader,
     ListFilter,
     DrinkCard,
+    CircularLoader
   },
   data() {
     return {
       drinkList: [],
+      loading: false,
     };
   },
   /** LifeCycle Hook com uma lista inicial de drinks */
@@ -49,9 +58,12 @@ export default {
   methods: {
     /** Faz a requisição com os drinks iniciais */
     async fetchInitialData() {
+      this.loading = true;
+
       try {
         const result = await inicialFetch();
         this.drinkList = result;
+        this.loading = false;
       } catch (ex) {
         console.log("err: ", ex);
       }
@@ -60,6 +72,8 @@ export default {
      * o endpoint correto baseado no filtro recebido
      */
     fetchRouter(data) {
+      this.loading = true;
+
       switch (data.typeSelected) {
         case "nome":
           this.fetchByName(data.filterContent);
@@ -68,10 +82,10 @@ export default {
           this.filterCocktail("a", data.filterContent);
           break;
         case "categoria":
-          this.filterCocktail("c", data.filterContent.replace(/ /g,"_"));
+          this.filterCocktail("c", data.filterContent.replace(/ /g, "_"));
           break;
         case "copo":
-          this.filterCocktail("g", data.filterContent.replace(/ /g,"_"));
+          this.filterCocktail("g", data.filterContent.replace(/ /g, "_"));
           break;
         case "ingrediente":
           // TODO: fetch by ingrediente
@@ -81,10 +95,12 @@ export default {
     },
     async fetchByName(name) {
       this.drinkList = await searchByCocktailName(name);
+      this.loading = false;
     },
     async filterCocktail(type, param) {
       this.drinkList = await filterCocktails(type, param);
-    }
+      this.loading = false;
+    },
   },
 };
 </script>
@@ -93,6 +109,12 @@ export default {
 .container {
   display: flex;
   margin: 2rem 1rem;
+  justify-content: center;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
