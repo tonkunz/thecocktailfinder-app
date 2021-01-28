@@ -6,19 +6,28 @@
         <!-- Filtros da busca -->
         <ListFilter @search="fetchRouter($event)" />
         <!-- Listagem dos drinks -->
-        <div class="drink-list">
+        <div class="results">
           <div class="loading-container" v-if="loading">
             <h3>Carregando...</h3>
-            <CircularLoader v-if="loading" />
+            <CircularLoader />
           </div>
 
-          <div
-            v-else
-            v-for="drink in drinkList"
-            :key="drink.idDrink"
-            class="list-item"
-          >
-            <DrinkCard :drink="drink" />
+          <div v-else class="drink-list">
+            <WarnContainer v-if="!drinkList">
+              <template #title>Ops...</template>
+              <template #body>
+                Não foram encontrados resultados para sua busca.
+              </template>
+            </WarnContainer>
+
+            <div
+              v-else
+              v-for="drink in drinkList"
+              :key="drink.idDrink"
+              class="list-item"
+            >
+              <DrinkCard :drink="drink" />
+            </div>
           </div>
         </div>
       </div>
@@ -31,6 +40,7 @@ import ListHeader from "./ListHeader.vue";
 import ListFilter from "./ListFilter.vue";
 import DrinkCard from "./DrinkCard";
 import CircularLoader from "@/components/shared/CircularLoader.vue";
+import WarnContainer from "@/components/shared/WarnContainer.vue";
 import {
   inicialFetch,
   searchByCocktailName,
@@ -43,7 +53,8 @@ export default {
     ListHeader,
     ListFilter,
     DrinkCard,
-    CircularLoader
+    CircularLoader,
+    WarnContainer
   },
   data() {
     return {
@@ -112,12 +123,6 @@ export default {
   justify-content: center;
 }
 
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .wide-container {
   display: flex;
   flex-direction: column;
@@ -129,6 +134,19 @@ export default {
 .content-container {
   margin-top: 1rem;
   display: flex;
+}
+
+.results {
+  flex: 3;
+  justify-content: center;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
 }
 
 .drink-list {

@@ -1,7 +1,7 @@
 <template>
   <nav>
     <router-link to="/" class="logo">
-      <img src="@/assets/logo.svg" alt="The CocktailFinder Logo">
+      <img src="@/assets/logo.svg" alt="The CocktailFinder Logo" />
     </router-link>
   </nav>
 </template>
@@ -14,12 +14,14 @@ nav {
   padding: 0 20px 0 50px;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
-  background: #583D72;
+  background: #583d72;
 }
 
 .logo img {
   width: 135px;
-  transition: transform .2s;
+  transition: transform 0.2s;
+  margin: 1rem 2rem;
+  width: 125px;
 }
 
 .logo img:hover {

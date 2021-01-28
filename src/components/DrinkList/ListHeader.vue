@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<style escoped>
+<style scoped>
 .list-header {
   display: flex;
   background: #583d72;
@@ -21,11 +21,20 @@
 
 .coqueteis {
   height: 40px;
-  margin: .5rem 2rem;
+  margin: 1.25rem 2rem;
 }
 
 .logo {
-  margin: 1rem 2rem;
+  margin-right: 2rem;
   width: 125px;
+}
+
+@media (max-width: 475px) {
+  .list-header {
+    justify-content: center;
+  }
+  .logo {
+    display: none;
+  }
 }
 </style>
