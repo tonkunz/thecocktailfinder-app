@@ -28,9 +28,13 @@
 
           <IngredientList :ingredients="ingredientsMeasures" />
 
-          <div class="btn-container">
-            <button>Compartilhar</button>
-            <button @click="showAvaliationModal = true">Avaliar</button>
+          <div class="footer-btns">
+            <SocialShare :drinkName="result.strDrink" />
+            <AppBtn
+              btnText="Avaliar Drink"
+              fontSize="1em"
+              @btn-clicked="showAvaliationModal = true"
+            />
           </div>
 
           <AvaliationModal
@@ -47,6 +51,8 @@
 import CircularLoader from "@/components/shared/CircularLoader.vue";
 import IngredientList from "@/components/DrinkPage/IngredientList.vue";
 import AvaliationModal from "@/components/DrinkPage/AvaliationModal.vue";
+import SocialShare from "@/components/DrinkPage/SocialShare.vue";
+import AppBtn from "@/components/shared/AppBtn.vue";
 import { getCocktailDetails } from "@/services/api.js";
 import { handleIngredients } from "@/utils/drinkDataHelpers.js";
 
@@ -55,7 +61,9 @@ export default {
   components: {
     CircularLoader,
     IngredientList,
-    AvaliationModal
+    AvaliationModal,
+    SocialShare,
+    AppBtn
   },
   /** Prop id recebida pela rota */
   props: ["id"],
@@ -138,6 +146,11 @@ export default {
 
 .instructions {
   width: 750px;
+}
+
+.footer-btns {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 1025px) {
