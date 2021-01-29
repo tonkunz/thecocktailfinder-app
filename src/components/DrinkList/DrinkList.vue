@@ -5,6 +5,7 @@
       <div class="content-container">
         <!-- Filtros da busca -->
         <ListFilter @search="fetchRouter($event)" />
+
         <!-- Listagem dos drinks -->
         <div class="results">
           <div class="loading-container" v-if="loading">
@@ -13,6 +14,7 @@
           </div>
 
           <div v-else class="drink-list">
+            <!-- Caso não tenha resultados -->
             <WarnContainer v-if="!drinkList">
               <template #title>Ops...</template>
               <template #body>
@@ -20,14 +22,22 @@
               </template>
             </WarnContainer>
 
+            <!-- Caso possua resultados -->
             <div
               v-else
-              v-for="drink in drinkList"
+              v-for="drink in paginateDrinkList"
               :key="drink.idDrink"
               class="list-item"
             >
               <DrinkCard :drink="drink" />
             </div>
+          </div>
+
+          <div class="pagination-container" v-if="!loading">
+            <Pagination
+              :totalElements="totalElements"
+              @page-changed="currentPage = $event"
+            />
           </div>
         </div>
       </div>
@@ -39,6 +49,7 @@
 import ListHeader from "./ListHeader.vue";
 import ListFilter from "./ListFilter.vue";
 import DrinkCard from "./DrinkCard";
+import Pagination from "./Pagination.vue";
 import CircularLoader from "@/components/shared/CircularLoader.vue";
 import WarnContainer from "@/components/shared/WarnContainer.vue";
 import {
@@ -54,17 +65,35 @@ export default {
     ListFilter,
     DrinkCard,
     CircularLoader,
-    WarnContainer
+    WarnContainer,
+    Pagination,
   },
   data() {
     return {
       drinkList: [],
       loading: false,
+      currentPage: 1,
     };
   },
   /** LifeCycle Hook com uma lista inicial de drinks */
   beforeMount() {
     this.fetchInitialData();
+  },
+  computed: {
+    /** Tratamento do length de DrinkList para enviar ao componente filho Pagination */
+    totalElements() {
+      return (this.drinkList && this.drinkList.length) || 0;
+    },
+    /** Retorna um array de drinks baseado na paginação */
+    paginateDrinkList() {
+      const lastDrinkIndex = this.currentPage * 20;
+      const firstDrinkIndex = lastDrinkIndex - 20;
+      const paginateDrinkList = this.drinkList.slice(
+        firstDrinkIndex,
+        lastDrinkIndex
+      );
+      return paginateDrinkList;
+    },
   },
   methods: {
     /** Faz a requisição com os drinks iniciais */
@@ -112,6 +141,10 @@ export default {
       this.drinkList = await filterCocktails(type, param);
       this.loading = false;
     },
+    /** Influencia na computedProperty de paginação */
+    setCurrentPage(currentPage) {
+      this.currentPage = currentPage;
+    },
   },
 };
 </script>
@@ -158,6 +191,11 @@ export default {
 
 .list-item {
   margin: 0.5rem;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
 }
 
 /** Responsividade */

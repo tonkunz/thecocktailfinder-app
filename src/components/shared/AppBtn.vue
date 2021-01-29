@@ -57,5 +57,6 @@ export default {
 
 .btn:disabled {
   background-color: #c9c9c9;
+  cursor: initial;
 }
 </style>
