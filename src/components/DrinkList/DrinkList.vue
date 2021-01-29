@@ -2,29 +2,29 @@
   <div class="container">
     <div class="wide-container">
       <ListHeader />
+
       <div class="content-container">
         <!-- Filtros da busca -->
         <ListFilter @search="fetchRouter($event)" />
 
+        <div class="loading-container" v-if="loading">
+          <h3>Carregando...</h3>
+          <CircularLoader />
+        </div>
+
         <!-- Listagem dos drinks -->
-        <div class="results">
-          <div class="loading-container" v-if="loading">
-            <h3>Carregando...</h3>
-            <CircularLoader />
-          </div>
+        <div v-else class="results">
+          <!-- Caso não tenha resultados -->
+          <WarnContainer v-if="!drinkList">
+            <template #title>Ops...</template>
+            <template #body>
+              Não foram encontrados resultados para sua busca.
+            </template>
+          </WarnContainer>
 
+          <!-- Caso possua resultados -->
           <div v-else class="drink-list">
-            <!-- Caso não tenha resultados -->
-            <WarnContainer v-if="!drinkList">
-              <template #title>Ops...</template>
-              <template #body>
-                Não foram encontrados resultados para sua busca.
-              </template>
-            </WarnContainer>
-
-            <!-- Caso possua resultados -->
             <div
-              v-else
               v-for="drink in paginateDrinkList"
               :key="drink.idDrink"
               class="list-item"
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="pagination-container" v-if="!loading">
+          <div class="pagination-container" v-if="!loading && drinkList">
             <Pagination
               :totalElements="totalElements"
               @page-changed="currentPage = $event"
@@ -136,12 +136,14 @@ export default {
     async fetchByName(name) {
       this.drinkList = await searchByCocktailName(name);
       this.loading = false;
+      this.currentPage = 1;
     },
     async filterCocktail(type, param) {
       this.drinkList = await filterCocktails(type, param);
       this.loading = false;
+      this.currentPage = 1;
     },
-    /** Influencia na computedProperty de paginação */
+    /** Influencia na computed property de paginação */
     setCurrentPage(currentPage) {
       this.currentPage = currentPage;
     },
@@ -169,12 +171,8 @@ export default {
   display: flex;
 }
 
-.results {
-  flex: 3;
-  justify-content: center;
-}
-
 .loading-container {
+  flex: 3;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -182,15 +180,17 @@ export default {
   margin-top: 1rem;
 }
 
-.drink-list {
+.results {
   flex: 3;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
 }
 
-.list-item {
-  margin: 0.5rem;
+.drink-list {
+  flex: 3;
+  margin-right: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .pagination-container {
@@ -204,7 +204,26 @@ export default {
     flex-direction: column;
   }
   .drink-list {
-    margin-top: 2rem;
+    margin-right: 0;
+  }
+}
+
+/** Ajuste na apresentação dos cards dependendo do tamanho da tela */
+@media (max-width: 1275px) {
+  .drink-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 725px) {
+  .drink-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .drink-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>

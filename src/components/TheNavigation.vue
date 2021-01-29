@@ -8,7 +8,7 @@
 
 <style scoped>
 nav {
-  position: fixed;
+  position: absolute;
   display: flex;
   margin-top: 20px;
   padding: 0 20px 0 50px;

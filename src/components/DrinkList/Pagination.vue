@@ -74,6 +74,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  padding: 0;
+}
+
 .container button {
   color: #583d72;
   font-size: 1.75em;

@@ -141,7 +141,7 @@ export default {
 <style scoped>
 .filter-section {
   flex: 1;
-  margin: 0 1rem;
+  margin: 0 1rem 1rem 1rem;
   display: flex;
   flex-direction: column;
 }

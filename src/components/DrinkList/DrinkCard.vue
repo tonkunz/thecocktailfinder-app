@@ -29,9 +29,8 @@ export default {
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.123);
-  max-width: 200px;
   border-radius: 15px;
-  height: 275px;
+  height: 100%;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: transform .2s; /* Zoom effect */
@@ -46,7 +45,7 @@ export default {
 .card img {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  max-width: 200px;
+  width: 100%;
   height: auto;
 }
 
