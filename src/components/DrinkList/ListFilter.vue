@@ -80,12 +80,24 @@
       </option>
     </select>
 
-    <!-- TODO: Select de ingrediente -->
+    <!-- Select de ingrediente -->
+    <select
+      v-if="search.typeSelected === 'ingrediente'"
+      name="ingrediente select"
+      id="ingrediente-select"
+      v-model="search.filterContent"
+      class="select"
+    >
+      <option value="">Selecione o ingrediente</option>
+      <option
+        v-for="(ing, key) in ingredients"
+        :key="key"
+        :value="ing.strIngredient1"
+      >
+        {{ ing.strIngredient1 }}
+      </option>
+    </select>
 
-    <!--
-      - Botão de busca.
-      - O botão fica disabled caso não tenha parâmetros para buscar
-    -->
     <AppBtn
       v-if="search.typeSelected !== ''"
       btnText="Buscar"
@@ -116,6 +128,7 @@ export default {
       ],
       categories: [],
       glasses: [],
+      ingredients: [],
       search: {
         typeSelected: "",
         filterContent: "",
@@ -130,6 +143,7 @@ export default {
       // Pega as categorias dos drinks
       this.categories = await getFilterList("c");
       this.glasses = await getFilterList("g");
+      this.ingredients = await getFilterList("i");
     },
     handleChangeType() {
       this.search.filterContent = "";

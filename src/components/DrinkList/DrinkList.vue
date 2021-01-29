@@ -128,8 +128,9 @@ export default {
           this.filterCocktail("g", data.filterContent.replace(/ /g, "_"));
           break;
         case "ingrediente":
-          // TODO: fetch by ingrediente
           console.log("Fetch by [ingrediente]");
+
+          this.filterCocktail("i", data.filterContent.replace(/ /g, "_"));
           break;
       }
     },
