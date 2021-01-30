@@ -6,18 +6,17 @@
         <h1>The Cocktail Finder</h1>
       </div>
 
-      <div class="text">
-        <p>
-          Esta aplicação trata-se de uma avaliação de habilidades de front-end.
-          Mas isso não significa que você não possa se divertir aqui buscando e
-          encontrando receitas de deliciosos coquetéis.
-        </p>
+      <p class="text">
+        Esta aplicação trata-se de uma avaliação de habilidades de front-end.
+        Mas isso não significa que você não possa se divertir aqui buscando e
+        encontrando receitas de deliciosos coquetéis.
+      </p>
 
-        <div class="btn-container">
-          <AppBtn btnText="Coquetéis" class="mg-bt" />
-          <AppBtn btnText="Sobre" />
-        </div>
-      </div>
+      <AppBtn
+        btnText="Começar!"
+        class="btn"
+        @btn-clicked="$emit('start')"
+      />
     </div>
   </div>
 </template>
@@ -28,8 +27,8 @@ import AppBtn from "@/components/shared/AppBtn.vue";
 export default {
   name: "TheHeader",
   components: {
-    AppBtn,
-  },
+    AppBtn
+  }
 };
 </script>
 
@@ -56,7 +55,7 @@ export default {
   margin: 0 1rem;
 }
 .titles h1 {
-  font-size: 3em;
+  font-size: 3.25em;
   margin-bottom: 1rem;
 }
 .titles h3 {
@@ -64,17 +63,15 @@ export default {
   font-size: 1.5em;
 }
 
-.text p {
+.text {
   max-width: 500px;
   margin: 1rem;
   display: flex;
   text-align: justify;
 }
 
-.btn-container {
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 2rem;
+.btn {
+  margin: 1rem;
 }
 
 /** Responsivity */
@@ -82,14 +79,8 @@ export default {
   .titles h1 {
     font-size: 1.75em;
   }
-
-  .btn-container {
-    flex-direction: column;
-    margin: 0 1rem;
-  }
-
-  .mg-bt {
-    margin-bottom: 1rem;
+  .btn {
+    width: 80%;
   }
 }
 </style>

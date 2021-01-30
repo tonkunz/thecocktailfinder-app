@@ -7,7 +7,7 @@
         <div class="text">
           <p>
             <strong>The Cocktail Finder</strong> é um projeto com o objetivo de
-            testar algumas tecnologias e técnicas relativas a front-end.
+            treinar/testar algumas tecnologias e técnicas relativas a front-end.
             <br /><br />
             Totalmente construído no poderoso framework VueJS e consumindo a API
             gratuíta:
@@ -20,7 +20,9 @@
         </div>
       </div>
     </div>
-    <p class="footer">The Cocktail Finder. Alguns direitos reservados.</p>
+    <p class="footer">The Cocktail Finder.
+      Criado por <a href="https://github.com/tonkunz" target="_blank">Everton Kunz.</a>
+    </p>
   </footer>
 </template>
 

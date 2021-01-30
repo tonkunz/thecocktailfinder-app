@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TheHeader />
-    <DrinkList />
+    <TheHeader @start="scrollToCoqueteisSection()" />
+    <DrinkList ref="coqueteis"/>
   </div>
 </template>
 
@@ -14,6 +14,13 @@ export default {
   components: {
     TheHeader,
     DrinkList
+  },
+  methods: {
+    scrollToCoqueteisSection() {
+      const element = this.$refs['coqueteis'];
+      const top = element.$el.offsetTop;
+      window.scrollTo(0, top - 10);
+    }
   }
 }
 </script>
