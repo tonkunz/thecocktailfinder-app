@@ -7,7 +7,7 @@
         :href="`https://api.whatsapp.com/send/?phone&text=
                 Você já experimentou um ${drinkName}.
                 Não? Então veja como fazer este drink em%3A+
-                https://localhost:8080/%23${$route.path}
+                https://thecocktailfinder.surge.sh/%23${$route.path}
                 &app_absent=0`"
         target="_blank"
       >
@@ -16,7 +16,7 @@
 
       <a
         :href="`https://www.facebook.com/sharer/sharer.php?u=
-                https://localhost:8080/%23${$route.path}`"
+                https://thecocktailfinder.surge.sh/%23${$route.path}`"
         target="_blank"
       >
         <img src="@/assets/icons/facebook.svg" alt="Facebook Icon" />

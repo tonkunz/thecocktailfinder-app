@@ -4,6 +4,10 @@
 
 The Cocktail Finder trata-se de uma aplicação web, construída com o poderoso framework front-end [VueJS](https://vuejs.org/), consumindo à API gratuíta [TheCocktailDB](https://www.thecocktaildb.com/api.php).
 
+## Versão Live da Aplicação
+
+Você pode dar uma olhada na aplicação aqui: [TheCocktailFinder](https://thecocktailfinder.surge.sh/). O deploy foi feito no [Surge](https://surge.sh/).
+
 ## Tecnologias Utilizadas
 
  - [VueJS vs2](https://vuejs.org/): Framework JS front-end;
