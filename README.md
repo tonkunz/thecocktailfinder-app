@@ -23,7 +23,7 @@ Você pode dar uma olhada na aplicação aqui: [TheCocktailFinder](https://theco
  git clone https://github.com/tonkunz/thecocktailfinder-app.git
  ```
 
-- Navegue até a rais do projeto
+- Navegue até a raiz do projeto
 ```
 cd thecocktailfinder-app
 ```
